@@ -3,7 +3,7 @@ import { MdEmail } from "react-icons/md";
 
 const socialLinks = [
   { label: "Facebook", href: "#facebook", icon: FaFacebookF },
-  { label: "Instagram", href: "#instagram", icon: FaInstagram },
+  { label: "Instagram", href: "https://www.instagram.com/i_am_heskey?igsh=MXM4ejVtcHBoY2szcA==&igsi=MXM4ejVtcHBoY2szcA==", icon: FaInstagram },
   { label: "LinkedIn", href: "#linkedin", icon: FaLinkedinIn },
 ];
 
@@ -23,7 +23,7 @@ export function FooterSection() {
             className="mt-3 inline-flex items-center gap-2 text-[13px] leading-none text-white transition hover:text-[#ff3339] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ff3339]"
           >
             <MdEmail aria-hidden="true" className="h-5 w-5 shrink-0" />
-            <span>HenryEgbe07@gmail.com</span>
+            <span>Egbeyouthboxing@gmail.com</span>
           </a>
         </div>
 

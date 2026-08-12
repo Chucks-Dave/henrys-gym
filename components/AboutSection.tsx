@@ -34,10 +34,10 @@ export function AboutSection() {
           </div>
 
           <a
-            href="#signup"
+            href="#contact"
             className="mt-3 inline-flex min-h-8 items-center bg-[#ff3339] px-4 text-[10px] font-black uppercase leading-none text-white transition hover:bg-[#f02027] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ff3339]"
           >
-            Sign Up
+            Contact Us
           </a>
         </div>
       </div>

@@ -7,7 +7,8 @@ import type {
 } from "react";
 import { useState } from "react";
 import { FaHeadset, FaRegCommentDots } from "react-icons/fa6";
-import { MdOutlineMail } from "react-icons/md";
+import { MdOutlineLocationOn, MdOutlineMail } from "react-icons/md";
+import { toast } from "sonner";
 import { CountryCodeSelect } from "@/components/CountryCodeSelect";
 
 type ContactFieldProps = {
@@ -27,13 +28,18 @@ const supportItems = [
   },
   {
     title: "SMS/WhatsApp:",
-    value: "+1 (505) 518-1598, +1 (505) 518-1598",
+    value: "+1 (505) 518-1598,",
     icon: FaRegCommentDots,
   },
   {
     title: "Email:",
-    value: "henryegbe07@gmail.com",
+    value: "Egbeyouthboxing@gmail.com",
     icon: MdOutlineMail,
+  },
+  {
+    title: "Address:",
+    value: "33rd Cir SE Rio Rancho 87124 NM",
+    icon: MdOutlineLocationOn,
   },
 ];
 
@@ -64,16 +70,11 @@ function ContactField({ label, name, className = "", multiline, ...props }: Cont
 }
 
 export function ContactSection() {
-  const [status, setStatus] = useState<{
-    type: "success" | "error";
-    message: string;
-  } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsSubmitting(true);
-    setStatus(null);
 
     const form = event.currentTarget;
     const formData = new FormData(form);
@@ -94,18 +95,13 @@ export function ContactSection() {
       }
 
       form.reset();
-      setStatus({
-        type: "success",
-        message: data.message ?? "Message sent successfully.",
-      });
+      toast.success(data.message ?? "Message sent successfully.");
     } catch (error) {
-      setStatus({
-        type: "error",
-        message:
-          error instanceof Error && error.message
-            ? error.message
-            : "Unable to send your message right now.",
-      });
+      toast.error(
+        error instanceof Error && error.message
+          ? error.message
+          : "Unable to send your message right now.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -165,21 +161,7 @@ export function ContactSection() {
               required
             />
 
-            <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-              {status ? (
-                <p
-                  role="status"
-                  className={`text-[13px] font-semibold ${
-                    status.type === "success"
-                      ? "text-[#15803d]"
-                      : "text-[#ff3339]"
-                  }`}
-                >
-                  {status.message}
-                </p>
-              ) : (
-                <span />
-              )}
+            <div className="mt-4 flex justify-end">
               <button
                 type="submit"
                 disabled={isSubmitting}

@@ -35,6 +35,32 @@ function hasMailConfig() {
   );
 }
 
+function getSmtpPassword() {
+  return process.env.SMTP_PASS?.replace(/\s+/g, "");
+}
+
+function getMailErrorMessage(error: unknown) {
+  if (
+    typeof error === "object" &&
+    error !== null &&
+    "responseCode" in error &&
+    error.responseCode === 535
+  ) {
+    return "Email credentials were rejected. Please check SMTP_USER and SMTP_PASS.";
+  }
+
+  if (
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    error.code === "EDNS"
+  ) {
+    return "Email host could not be reached. Please check SMTP_HOST.";
+  }
+
+  return "Unable to send your message right now.";
+}
+
 export async function POST(request: Request) {
   try {
     const payload = (await request.json()) as ContactPayload;
@@ -65,7 +91,7 @@ export async function POST(request: Request) {
       secure: process.env.SMTP_SECURE === "true",
       auth: {
         user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        pass: getSmtpPassword(),
       },
     });
 
@@ -102,9 +128,9 @@ export async function POST(request: Request) {
     });
 
     return Response.json({ message: "Message sent successfully." });
-  } catch {
+  } catch (error) {
     return Response.json(
-      { message: "Unable to send your message right now." },
+      { message: getMailErrorMessage(error) },
       { status: 500 },
     );
   }

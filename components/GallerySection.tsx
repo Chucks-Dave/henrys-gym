@@ -40,15 +40,16 @@ const galleryImages = [
 ];
 
 const visibleCount = 4;
-const slideCount = 4;
+const slideCount = Math.ceil(galleryImages.length / visibleCount);
 const galleryVideo = "/VIDEO-2026-08-10-03-47-47.mp4";
 
 export function GallerySection() {
   const [activeSlide, setActiveSlide] = useState(0);
 
-  const visibleImages = Array.from({ length: visibleCount }, (_, index) => {
-    return galleryImages[(activeSlide + index) % galleryImages.length];
-  });
+  const visibleImages = galleryImages.slice(
+    activeSlide * visibleCount,
+    activeSlide * visibleCount + visibleCount,
+  );
 
   const showPrevious = () => {
     setActiveSlide((current) => (current === 0 ? slideCount - 1 : current - 1));
