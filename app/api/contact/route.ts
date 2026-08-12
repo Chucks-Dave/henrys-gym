@@ -1,4 +1,8 @@
 import nodemailer from "nodemailer";
+import {
+  buildContactEmailHtml,
+  buildContactEmailText,
+} from "@/lib/contact-email-template";
 
 export const runtime = "nodejs";
 
@@ -15,15 +19,6 @@ type ContactPayload = {
 
 function asText(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
-}
-
-function escapeHtml(value: string) {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
 }
 
 function hasMailConfig() {
@@ -96,35 +91,21 @@ export async function POST(request: Request) {
     });
 
     const phone = [countryCode, contactDetails].filter(Boolean).join(" ");
-    const safeFirstName = escapeHtml(firstName);
-    const safeLastName = escapeHtml(lastName);
-    const safeEmail = escapeHtml(email);
-    const safePhone = escapeHtml(phone || "Not provided");
-    const safeMessage = escapeHtml(message).replace(/\n/g, "<br />");
+    const emailData = {
+      firstName,
+      lastName,
+      email,
+      phone,
+      message,
+    };
 
     await transporter.sendMail({
       from: process.env.SMTP_FROM ?? process.env.SMTP_USER,
       to: contactEmail,
       replyTo: email,
       subject: `New contact message from ${firstName} ${lastName}`,
-      text: [
-        `Name: ${firstName} ${lastName}`,
-        `Email: ${email}`,
-        `Phone: ${phone || "Not provided"}`,
-        "",
-        "Message:",
-        message,
-      ].join("\n"),
-      html: `
-        <div style="font-family: Arial, sans-serif; line-height: 1.5; color: #111;">
-          <h2>New contact message</h2>
-          <p><strong>Name:</strong> ${safeFirstName} ${safeLastName}</p>
-          <p><strong>Email:</strong> ${safeEmail}</p>
-          <p><strong>Phone:</strong> ${safePhone}</p>
-          <p><strong>Message:</strong></p>
-          <p>${safeMessage}</p>
-        </div>
-      `,
+      text: buildContactEmailText(emailData),
+      html: buildContactEmailHtml(emailData),
     });
 
     return Response.json({ message: "Message sent successfully." });
