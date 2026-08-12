@@ -19,11 +19,11 @@ export function FooterSection() {
           </h2>
 
           <a
-            href="mailto:info@boxchampy.com"
+            href="mailto:HenryEgbe07@gmail.com"
             className="mt-3 inline-flex items-center gap-2 text-[13px] leading-none text-white transition hover:text-[#ff3339] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ff3339]"
           >
             <MdEmail aria-hidden="true" className="h-5 w-5 shrink-0" />
-            <span>info@boxchampy.com</span>
+            <span>HenryEgbe07@gmail.com</span>
           </a>
         </div>
 
@@ -41,7 +41,7 @@ export function FooterSection() {
             ))}
           </div>
 
-          <nav aria-label="Footer navigation" className="flex flex-wrap items-center gap-x-7 gap-y-3">
+          {/* <nav aria-label="Footer navigation" className="flex flex-wrap items-center gap-x-7 gap-y-3">
             <a
               href="#privacy"
               className="text-[12px] leading-none text-white transition hover:text-[#ff3339] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ff3339]"
@@ -54,7 +54,7 @@ export function FooterSection() {
             >
               Terms &amp; conditions
             </a>
-          </nav>
+          </nav> */}
         </div>
       </div>
     </footer>

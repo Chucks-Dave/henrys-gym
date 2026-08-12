@@ -4,9 +4,9 @@ export function AboutSection() {
       <div className="mx-auto grid w-full max-w-[780px] items-start gap-10 md:grid-cols-[314px_1fr] md:gap-[52px]">
         <div
           role="img"
-          aria-label="Boxer training with focus mitts"
-          className="aspect-[314/343] w-full bg-zinc-300 bg-cover bg-center md:h-[343px]"
-          style={{ backgroundImage: "url('/about.png')" }}
+          aria-label="Coach holding mitts during boxing training"
+          className="aspect-[314/343] w-full bg-zinc-300 bg-cover rounded bg-center md:h-[343px]"
+          style={{ backgroundImage: "url('/PHOTO-2026-08-10-03-47-50.jpg')" }}
         />
 
         <div className="md:pt-1">

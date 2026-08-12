@@ -27,18 +27,18 @@ const reasons = [
 
 const imageTiles = [
   {
-    src: "/about.png",
-    alt: "Boxing training session",
+    src: "/PHOTO-2026-08-10-03-47-50%202.jpg",
+    alt: "Boxer slipping a punch during mitt work",
     className: "aspect-[230/136] lg:col-start-1 lg:row-start-1",
   },
   {
-    src: "/hero-image.png",
-    alt: "Boxing workout equipment",
+    src: "/PHOTO-2026-08-10-03-47-49%204.jpg",
+    alt: "Boxing pad work session",
     className: "aspect-[230/136] lg:col-start-1 lg:row-start-2",
   },
   {
-    src: "/about.png",
-    alt: "Focused boxing practice",
+    src: "/PHOTO-2026-08-10-03-47-50%203.jpg",
+    alt: "Boxer throwing a punch at focus mitts",
     className: "aspect-[240/290] lg:col-start-2 lg:row-span-2 lg:row-start-1",
   },
 ];
