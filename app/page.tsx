@@ -9,7 +9,7 @@ import { WhyChooseUsSection } from "@/components/WhyChooseUsSection";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#eceaec] font-sans">
+    <main className="min-h-screen max-w-full overflow-x-hidden bg-[#eceaec] font-sans">
       <HeroSection />
       <AboutSection />
       <WhyChooseUsSection />

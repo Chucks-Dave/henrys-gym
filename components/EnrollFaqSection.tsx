@@ -53,7 +53,7 @@ export function EnrollFaqSection() {
         </div>
 
         <div className="mt-4 rounded-[4px] bg-[#1f1f1f] px-6 py-4">
-          <div className="flex flex-wrap justify-center gap-x-4 gap-y-3">
+          <div className="lg:flex lg:flex-wrap lg:justify-center lg:gap-x-4 lg:gap-y-3 max-md:grid max-md:grid-cols-2 max-md:gap-3">
             {enrollHighlights.map((highlight) => (
               <span
                 key={highlight}

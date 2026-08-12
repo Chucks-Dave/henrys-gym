@@ -22,6 +22,9 @@
 
 html,
 body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   scrollbar-color: var(--brand-red) #111111;
 }
 
@@ -34,6 +37,11 @@ body {
 ::-webkit-scrollbar {
   width: 12px;
   height: 12px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 0;
+  display: none;
 }
 
 ::-webkit-scrollbar-track {
