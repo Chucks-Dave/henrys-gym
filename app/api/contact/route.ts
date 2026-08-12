@@ -1,0 +1,111 @@
+import nodemailer from "nodemailer";
+
+export const runtime = "nodejs";
+
+const contactEmail = "henryegbe07@gmail.com";
+
+type ContactPayload = {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  countryCode?: string;
+  contactDetails?: string;
+  message?: string;
+};
+
+function asText(value: unknown) {
+  return typeof value === "string" ? value.trim() : "";
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function hasMailConfig() {
+  return Boolean(
+    process.env.SMTP_HOST &&
+      process.env.SMTP_PORT &&
+      process.env.SMTP_USER &&
+      process.env.SMTP_PASS,
+  );
+}
+
+export async function POST(request: Request) {
+  try {
+    const payload = (await request.json()) as ContactPayload;
+    const firstName = asText(payload.firstName);
+    const lastName = asText(payload.lastName);
+    const email = asText(payload.email);
+    const countryCode = asText(payload.countryCode);
+    const contactDetails = asText(payload.contactDetails);
+    const message = asText(payload.message);
+
+    if (!firstName || !lastName || !email || !message) {
+      return Response.json(
+        { message: "Please fill in your name, email, and message." },
+        { status: 400 },
+      );
+    }
+
+    if (!hasMailConfig()) {
+      return Response.json(
+        { message: "Email service is not configured yet." },
+        { status: 500 },
+      );
+    }
+
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
+      secure: process.env.SMTP_SECURE === "true",
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    });
+
+    const phone = [countryCode, contactDetails].filter(Boolean).join(" ");
+    const safeFirstName = escapeHtml(firstName);
+    const safeLastName = escapeHtml(lastName);
+    const safeEmail = escapeHtml(email);
+    const safePhone = escapeHtml(phone || "Not provided");
+    const safeMessage = escapeHtml(message).replace(/\n/g, "<br />");
+
+    await transporter.sendMail({
+      from: process.env.SMTP_FROM ?? process.env.SMTP_USER,
+      to: contactEmail,
+      replyTo: email,
+      subject: `New contact message from ${firstName} ${lastName}`,
+      text: [
+        `Name: ${firstName} ${lastName}`,
+        `Email: ${email}`,
+        `Phone: ${phone || "Not provided"}`,
+        "",
+        "Message:",
+        message,
+      ].join("\n"),
+      html: `
+        <div style="font-family: Arial, sans-serif; line-height: 1.5; color: #111;">
+          <h2>New contact message</h2>
+          <p><strong>Name:</strong> ${safeFirstName} ${safeLastName}</p>
+          <p><strong>Email:</strong> ${safeEmail}</p>
+          <p><strong>Phone:</strong> ${safePhone}</p>
+          <p><strong>Message:</strong></p>
+          <p>${safeMessage}</p>
+        </div>
+      `,
+    });
+
+    return Response.json({ message: "Message sent successfully." });
+  } catch {
+    return Response.json(
+      { message: "Unable to send your message right now." },
+      { status: 500 },
+    );
+  }
+}

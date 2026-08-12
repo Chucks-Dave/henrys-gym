@@ -1,4 +1,11 @@
-import type { InputHTMLAttributes, TextareaHTMLAttributes } from "react";
+"use client";
+
+import type {
+  FormEvent,
+  InputHTMLAttributes,
+  TextareaHTMLAttributes,
+} from "react";
+import { useState } from "react";
 import { FaHeadset, FaRegCommentDots } from "react-icons/fa6";
 import { MdOutlineMail } from "react-icons/md";
 import { CountryCodeSelect } from "@/components/CountryCodeSelect";
@@ -25,7 +32,7 @@ const supportItems = [
   },
   {
     title: "Email:",
-    value: "HenryEgbe07@gmail.com",
+    value: "henryegbe07@gmail.com",
     icon: MdOutlineMail,
   },
 ];
@@ -57,6 +64,53 @@ function ContactField({ label, name, className = "", multiline, ...props }: Cont
 }
 
 export function ContactSection() {
+  const [status, setStatus] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setStatus(null);
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      const data = (await response.json()) as { message?: string };
+
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+
+      form.reset();
+      setStatus({
+        type: "success",
+        message: data.message ?? "Message sent successfully.",
+      });
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message:
+          error instanceof Error && error.message
+            ? error.message
+            : "Unable to send your message right now.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <section id="contact" className="bg-white px-6 py-5 text-[#111] sm:px-10 lg:px-16">
       <div className="mx-auto grid w-full max-w-[1040px] gap-4 lg:grid-cols-[1fr_336px]">
@@ -69,15 +123,30 @@ export function ContactSection() {
             Do you have a question? Send us a message.
           </p>
 
-          <form action="#" aria-label="Contact form" className="mt-5">
+          <form
+            aria-label="Contact form"
+            className="mt-5"
+            onSubmit={handleSubmit}
+          >
             <div className="grid gap-4 sm:grid-cols-2">
-              <ContactField label="First Name" name="firstName" placeholder="Enter your first name" />
-              <ContactField label="Last Name" name="lastName" placeholder="Enter your last name" />
+              <ContactField
+                label="First Name"
+                name="firstName"
+                placeholder="Enter your first name"
+                required
+              />
+              <ContactField
+                label="Last Name"
+                name="lastName"
+                placeholder="Enter your last name"
+                required
+              />
               <ContactField
                 label="Email"
                 name="email"
                 type="email"
                 placeholder="Enter your email address"
+                required
               />
               <label className="relative block">
                 <span className="absolute -top-2 left-3 z-10 bg-white px-1 text-[11px] leading-none text-[#4d596c]">
@@ -93,14 +162,30 @@ export function ContactSection() {
               placeholder="Enter your message"
               multiline
               className="mt-[18px]"
+              required
             />
 
-            <div className="mt-4 flex justify-end">
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+              {status ? (
+                <p
+                  role="status"
+                  className={`text-[13px] font-semibold ${
+                    status.type === "success"
+                      ? "text-[#15803d]"
+                      : "text-[#ff3339]"
+                  }`}
+                >
+                  {status.message}
+                </p>
+              ) : (
+                <span />
+              )}
               <button
                 type="submit"
-                className="h-[43px] rounded-[6px] bg-[#ff3339] px-7 text-[14px] font-bold text-white transition hover:bg-[#f02027] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ff3339]"
+                disabled={isSubmitting}
+                className="h-[43px] rounded-[6px] bg-[#ff3339] px-7 text-[14px] font-bold text-white transition hover:bg-[#f02027] disabled:cursor-not-allowed disabled:bg-[#a7a7a7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ff3339]"
               >
-                Send a Message
+                {isSubmitting ? "Sending..." : "Send a Message"}
               </button>
             </div>
           </form>

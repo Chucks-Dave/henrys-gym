@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const navItems = ["Home", "About", "Location", "Contact"];
+const navItems = ["Home", "About", "Contact"];
 
 const features = [
   {
