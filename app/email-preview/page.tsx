@@ -7,6 +7,10 @@ import {
 export const metadata: Metadata = {
   title: "Email Preview | Egbes Youth Boxing",
   description: "Preview the Egbes Youth Boxing contact email template.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function EmailPreviewPage() {

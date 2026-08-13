@@ -116,7 +116,7 @@ export function ContactSection() {
           </h2>
           <div className="mt-3 h-[2px] w-[72px] bg-[#ff3339]" />
           <p className="mt-5 max-w-[390px] text-[18px] font-semibold leading-[1.15] text-[#43516c]">
-            Do you have a question? Send us a message.
+            Questions about youth boxing classes in Rio Rancho, NM? Send us a message.
           </p>
 
           <form
