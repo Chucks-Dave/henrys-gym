@@ -49,16 +49,16 @@ export function HeroSection() {
           </nav>
         </header>
 
-        <div className="relative z-10 mx-auto box-border flex min-h-[420px] w-full max-w-[820px] items-center justify-start overflow-hidden px-6 pb-24 pt-16 text-left sm:min-h-[360px] sm:px-8 md:min-h-[300px] md:px-0 lg:min-h-[360px]">
+        <div className="relative z-10 mx-auto box-border flex lg:min-h-[420px] w-full max-w-[820px] items-center justify-start overflow-hidden px-6 lg:pb-24 pt-16 text-left sm:min-h-[360px] sm:px-8 md:min-h-[300px] md:px-0 lg:min-h-[360px]">
           <div className="w-[58%] min-w-[220px] max-w-[360px] sm:w-full sm:max-w-full">
-            <h1 className="max-w-full overflow-hidden text-[clamp(1.95rem,7.8vw,3rem)] font-black uppercase leading-[1] tracking-[0] text-white md:text-[clamp(3.2rem,6.2vw,5.5rem)] lg:max-w-[760px]">
-              Train And Develop
+            <h1 className="max-w-full overflow-hidden text-[clamp(1.9rem,7.4vw,3rem)] font-black uppercase leading-[1] tracking-[0] text-white md:text-[clamp(3.2rem,6.2vw,5.5rem)] lg:max-w-[760px]">
+              More Than Boxing
               <br />
-              Habits Champions
+              Building Character
               <br />
-              <span className="text-[#ff3339]">Possess</span>
+              <span className="text-[#ff3339]">For Life</span>
             </h1>
-            <p className="mt-4 max-w-[520px] text-[14px] font-bold leading-[1.45] text-white/85 sm:text-[17px]">
+            <p className="my-3 max-w-[520px] text-[14px] font-bold leading-[1.45] text-white/85 sm:text-[17px]">
               Youth boxing lessons that help kids build discipline, confidence,
               focus, and respect inside and outside the gym.
             </p>

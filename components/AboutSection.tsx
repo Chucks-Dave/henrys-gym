@@ -21,7 +21,7 @@ export function AboutSection() {
 
           <div className="max-w-[400px] space-y-6 text-[12px] font-normal leading-[1.6] text-[#4b4b4b]">
             <p>
-              Boxchampy started with a simple goal: create a training space where beginners,
+              Egbe&apos;s Youth Boxing started with a simple goal: create a training space where beginners,
               young athletes, and everyday fighters can build real boxing skill with confidence.
               Every session is shaped around discipline, fitness, footwork, and proper technique,
               so each athlete learns how to move, strike, defend, and grow at their own pace.

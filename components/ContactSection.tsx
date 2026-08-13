@@ -28,7 +28,7 @@ const supportItems = [
   },
   {
     title: "SMS/WhatsApp:",
-    value: "+1 (505) 518-1598,",
+    value: "+1 (505) 518-1598",
     icon: FaRegCommentDots,
   },
   {
