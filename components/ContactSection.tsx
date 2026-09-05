@@ -9,6 +9,7 @@ import { useState } from "react";
 import { FaHeadset, FaRegCommentDots } from "react-icons/fa6";
 import { MdOutlineLocationOn, MdOutlineMail } from "react-icons/md";
 import { toast } from "sonner";
+import posthog from "posthog-js";
 import { CountryCodeSelect } from "@/components/CountryCodeSelect";
 
 type ContactFieldProps = {
@@ -94,6 +95,14 @@ export function ContactSection() {
         throw new Error(data.message);
       }
 
+      if (
+        process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN &&
+        process.env.NEXT_PUBLIC_POSTHOG_HOST
+      ) {
+        posthog.capture("contact_form_submitted", {
+          has_phone_number: Boolean(payload.contactDetails),
+        });
+      }
       form.reset();
       toast.success(data.message ?? "Message sent successfully.");
     } catch (error) {
