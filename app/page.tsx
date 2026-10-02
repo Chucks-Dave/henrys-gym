@@ -8,12 +8,22 @@ import { HeroSection } from "@/components/HeroSection";
 import { WhyChooseUsSection } from "@/components/WhyChooseUsSection";
 
 const siteUrl = "https://www.egbeyouthboxing.com";
+const siteName = "Egbe's Youth Boxing";
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteUrl}/#website`,
+  url: siteUrl,
+  name: siteName,
+  alternateName: "Egbes Youth Boxing",
+};
 
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "SportsActivityLocation"],
   "@id": `${siteUrl}/#local-business`,
-  name: "Egbe's Youth Boxing",
+  name: siteName,
   url: siteUrl,
   logo: `${siteUrl}/boxing-logo.jpg`,
   image: [
@@ -71,6 +81,10 @@ const localBusinessJsonLd = {
 export default function Home() {
   return (
     <main className="min-h-screen max-w-full overflow-x-hidden bg-[#eceaec] font-sans">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
