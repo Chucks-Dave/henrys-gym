@@ -8,7 +8,8 @@ import { HeroSection } from "@/components/HeroSection";
 import { WhyChooseUsSection } from "@/components/WhyChooseUsSection";
 
 const siteUrl = "https://www.egbeyouthboxing.com";
-const siteName = "Egbe's Youth Boxing";
+const siteName = "egbeyouthboxing";
+const businessName = "Egbe's Youth Boxing";
 
 const websiteJsonLd = {
   "@context": "https://schema.org",
@@ -16,14 +17,14 @@ const websiteJsonLd = {
   "@id": `${siteUrl}/#website`,
   url: siteUrl,
   name: siteName,
-  alternateName: "Egbes Youth Boxing",
+  alternateName: [businessName, "Egbes Youth Boxing"],
 };
 
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "SportsActivityLocation"],
   "@id": `${siteUrl}/#local-business`,
-  name: siteName,
+  name: businessName,
   url: siteUrl,
   logo: `${siteUrl}/boxing-logo.jpg`,
   image: [

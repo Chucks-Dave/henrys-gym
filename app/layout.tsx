@@ -3,7 +3,7 @@ import { AppToaster } from "@/components/AppToaster";
 import "./globals.css";
 
 const siteUrl = new URL("https://www.egbeyouthboxing.com");
-const siteName = "Egbe's Youth Boxing";
+const siteName = "egbeyouthboxing";
 const siteDescription =
   "Youth boxing training in Rio Rancho, NM helping kids build discipline, confidence, fitness, focus, and character for life.";
 
