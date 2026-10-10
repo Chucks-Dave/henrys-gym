@@ -35,13 +35,6 @@ export function HeroSection() {
             </span>
           </a>
 
-          <Link
-            href="/training-programs"
-            className="shrink-0 text-[11px] font-black uppercase text-white transition-colors duration-150 hover:text-[#ff3339] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ff3339] md:hidden"
-          >
-            Programs
-          </Link>
-
           <nav aria-label="Main navigation" className="hidden items-center gap-6 md:flex">
             {navItems.map((item) => (
               <Link

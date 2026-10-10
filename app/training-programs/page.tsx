@@ -110,15 +110,9 @@ export default function TrainingProgramsPage() {
           <nav className="flex items-center gap-3" aria-label="Training programs navigation">
             <Link
               href="/"
-              className="hidden text-[13px] font-bold uppercase text-white/75 transition-colors duration-150 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ff3339] sm:inline"
+              className="hidden text-[13px] font-bold uppercase text-white/75 transition-colors duration-150 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ff3339] md:inline"
             >
               Home
-            </Link>
-            <Link
-              href="/#contact"
-              className="inline-flex min-h-11 items-center bg-[#ff3339] px-4 text-[12px] font-black uppercase transition-[background-color,transform] duration-150 hover:bg-[#e9232a] active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:px-5"
-            >
-              Contact Us
             </Link>
           </nav>
         </div>

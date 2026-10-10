@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AppToaster } from "@/components/AppToaster";
+import { MobileTabBar } from "@/components/MobileTabBar";
 import "./globals.css";
 
 const siteUrl = new URL("https://www.egbeyouthboxing.com");
@@ -77,8 +78,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col bg-black pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pb-0">
         {children}
+        <MobileTabBar />
         <AppToaster />
       </body>
     </html>
