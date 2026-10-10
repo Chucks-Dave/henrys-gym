@@ -16,5 +16,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
         `${siteUrl}/PHOTO-2026-08-10-03-47-49%204.jpg`,
       ],
     },
+    {
+      url: `${siteUrl}/training-programs`,
+      lastModified: new Date("2026-10-10"),
+      changeFrequency: "monthly",
+      priority: 0.9,
+      images: [
+        `${siteUrl}/PHOTO-2026-08-10-03-47-49%204.jpg`,
+        `${siteUrl}/PHOTO-2026-08-10-03-47-50%204.jpg`,
+      ],
+    },
   ];
 }

@@ -1,6 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 
-const navItems = ["Home", "About", "Contact"];
+const navItems = [
+  { label: "Home", href: "/" },
+  { label: "Programs", href: "/training-programs" },
+  { label: "About", href: "#about" },
+];
 
 export function HeroSection() {
   return (
@@ -30,15 +35,22 @@ export function HeroSection() {
             </span>
           </a>
 
+          <Link
+            href="/training-programs"
+            className="shrink-0 text-[11px] font-black uppercase text-white transition-colors duration-150 hover:text-[#ff3339] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ff3339] md:hidden"
+          >
+            Programs
+          </Link>
+
           <nav aria-label="Main navigation" className="hidden items-center gap-6 md:flex">
             {navItems.map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+              <Link
+                key={item.label}
+                href={item.href}
                 className="text-[12px] font-black uppercase leading-none tracking-[-0.01em] text-white transition hover:text-[#ff3b3f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ff3b3f]"
               >
-                {item}
-              </a>
+                {item.label}
+              </Link>
             ))}
             <a
               href="#contact"
